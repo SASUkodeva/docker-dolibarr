@@ -1,0 +1,4908 @@
+{
+    "swagger": "2.0",
+    "host": "localhost",
+    "basePath": "/api/index.php",
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "consumes": [
+        "application/json",
+        "application/xml",
+        "multipart/form-data"
+    ],
+    "paths": {
+        "/bankaccounts": {
+            "get": {
+                "operationId": "listBankaccounts",
+                "tags": [
+                    "bankaccounts"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "t.rowid",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Limit for list",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "Other criteria to filter answers separated by a comma. Syntax example \"(t.ref:like:'SO-%') and (t.import_key:<:'20160101')\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get the list of accounts. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "createBankaccounts",
+                "tags": [
+                    "bankaccounts"
+                ],
+                "parameters": [
+                    {
+                        "name": "createBankaccountsModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/createBankaccountsModel"
+                        }
+                    }
+                ],
+                "summary": "Create account object 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/bankaccounts/{id}": {
+            "get": {
+                "operationId": "retrieveBankaccounts",
+                "tags": [
+                    "bankaccounts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of account",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Get account by ID. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "operationId": "updateBankaccounts",
+                "tags": [
+                    "bankaccounts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of account",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "updateBankaccountsModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/updateBankaccountsModel"
+                        }
+                    }
+                ],
+                "summary": "Update account 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "removeBankaccounts",
+                "tags": [
+                    "bankaccounts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of account",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Delete account 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/bankaccounts/{id}/lines": {
+            "get": {
+                "operationId": "bankaccountsRetrieveLines",
+                "tags": [
+                    "bankaccounts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of account",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Get the list of lines of the account. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "bankaccountsAddLine",
+                "tags": [
+                    "bankaccounts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of account",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "bankaccountsAddLineModel",
+                        "description": "**date** (required)  \n**type** (required)  \n**label** (required)  \n**amount** (required)  \ncategory  \ncheque_number  \ncheque_writer  \ncheque_bank  \n",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/bankaccountsAddLineModel"
+                        }
+                    }
+                ],
+                "summary": "Add a line to an account 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/bankaccounts/{id}/lines/{line_id}/links": {
+            "post": {
+                "operationId": "bankaccountsAddLink",
+                "tags": [
+                    "bankaccounts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of account",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "line_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of account line",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "bankaccountsAddLinkModel",
+                        "description": "**url_id** (required)  \n**url** (required)  \n**label** (required)  \n**type** (required)  \n",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/bankaccountsAddLinkModel"
+                        }
+                    }
+                ],
+                "summary": "Add a link to an account line 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/contacts/{id}": {
+            "get": {
+                "operationId": "retrieveContacts",
+                "tags": [
+                    "contacts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of contact",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Get properties of a contact object 🔐",
+                "description": "Return an array with contact informations",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "operationId": "updateContacts",
+                "tags": [
+                    "contacts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of contact to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "updateContactsModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/updateContactsModel"
+                        }
+                    }
+                ],
+                "summary": "Update contact 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "removeContacts",
+                "tags": [
+                    "contacts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Contact ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Delete contact 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/contacts": {
+            "get": {
+                "operationId": "listContacts",
+                "tags": [
+                    "contacts"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "t.rowid",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Limit for list",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "thirdparty_ids",
+                        "type": "string",
+                        "description": "Thirdparty ids to filter contacts of.",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "Other criteria to filter answers separated by a comma. Syntax example \"(t.ref:like:'SO-%') and (t.date_creation:<:'20160101')\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "List contacts 🔐",
+                "description": "Get a list of contacts",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "createContacts",
+                "tags": [
+                    "contacts"
+                ],
+                "parameters": [
+                    {
+                        "name": "createContactsModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/createContactsModel"
+                        }
+                    }
+                ],
+                "summary": "Create contact object 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/contacts/{id}/createUser": {
+            "post": {
+                "operationId": "contactsCreateUser",
+                "tags": [
+                    "contacts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of contact",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "contactsCreateUserModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/contactsCreateUserModel"
+                        }
+                    }
+                ],
+                "summary": "Create an user account object from contact (external user) 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/contacts/{id}/categories": {
+            "get": {
+                "operationId": "contactsRetrieveCategories",
+                "tags": [
+                    "contacts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of contact",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "s.rowid",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Limit for list",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get categories for a contact 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/documents/download": {
+            "get": {
+                "operationId": "listDocuments",
+                "tags": [
+                    "documents"
+                ],
+                "parameters": [
+                    {
+                        "name": "module_part",
+                        "type": "string",
+                        "description": "Name of module or area concerned by file download ('facture', ...)",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "original_file",
+                        "type": "string",
+                        "description": "Relative path with filename, relative to modulepart (for example: IN201701-999/IN201701-999.pdf)",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Download a document. 🔐",
+                "description": " Note that, this API is similar to using the wrapper link \"documents.php\" to download a file (used for internal HTML links of documents into application), but with no need to have a session cookie (the token is used instead).",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/documents/builddoc": {
+            "put": {
+                "operationId": "documentsBuilddoc",
+                "tags": [
+                    "documents"
+                ],
+                "parameters": [
+                    {
+                        "name": "documentsBuilddocModel",
+                        "description": "**module_part** (required)  \noriginal_file  \ndoctemplate  \nlangcode  \n",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/documentsBuilddocModel"
+                        }
+                    }
+                ],
+                "summary": "Build a document. 🔐",
+                "description": " Test sample 1: { \"module_part\": \"invoice\", \"original_file\": \"FA1701-001/FA1701-001.pdf\", \"doctemplate\": \"crabe\", \"langcode\": \"fr_FR\" }.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "501": {
+                        "description": "Not Implemented"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/documents": {
+            "get": {
+                "operationId": "documentsRetrieveDocumentsListByElement",
+                "tags": [
+                    "documents"
+                ],
+                "parameters": [
+                    {
+                        "name": "modulepart",
+                        "type": "string",
+                        "description": "Name of module or area concerned ('thirdparty', 'member', 'proposal', 'order', 'invoice', 'shipment', 'project', ...)",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of element",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "ref",
+                        "type": "string",
+                        "description": "Ref of element",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "description": "Sort criteria ('','fullname','relativename','name','date','size')",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "description": "Sort order ('asc' or 'desc')",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Return the list of documents of a dedicated element (from its ID or Ref) 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/documents/upload": {
+            "post": {
+                "operationId": "createDocuments",
+                "tags": [
+                    "documents"
+                ],
+                "parameters": [
+                    {
+                        "name": "createDocumentsModel",
+                        "description": "**filename** (required)  \n**modulepart** (required)  \nref  \nsubdir  \nfilecontent  \nfileencoding  \noverwriteifexists  \n",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/createDocumentsModel"
+                        }
+                    }
+                ],
+                "summary": "Upload a file. 🔐",
+                "description": " Test sample 1: { \"filename\": \"mynewfile.txt\", \"modulepart\": \"facture\", \"ref\": \"FA1701-001\", \"subdir\": \"\", \"filecontent\": \"content text\", \"fileencoding\": \"\", \"overwriteifexists\": \"0\" }. Test sample 2: { \"filename\": \"mynewfile.txt\", \"modulepart\": \"medias\", \"ref\": \"\", \"subdir\": \"image/mywebsite\", \"filecontent\": \"Y29udGVudCB0ZXh0Cg==\", \"fileencoding\": \"base64\", \"overwriteifexists\": \"0\" }.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/expensereports/{id}": {
+            "get": {
+                "operationId": "retrieveExpensereports",
+                "tags": [
+                    "expensereports"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of Expense Report",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Get properties of a Expense Report object 🔐",
+                "description": "Return an array with Expense Report informations",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "operationId": "updateExpensereports",
+                "tags": [
+                    "expensereports"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of Expense Report to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "updateExpensereportsModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/updateExpensereportsModel"
+                        }
+                    }
+                ],
+                "summary": "Update Expense Report general fields (won't touch lines of expensereport) 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "removeExpensereports",
+                "tags": [
+                    "expensereports"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Expense Report ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Delete Expense Report 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/expensereports": {
+            "get": {
+                "operationId": "listExpensereports",
+                "tags": [
+                    "expensereports"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "t.rowid",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Limit for list",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "user_ids",
+                        "type": "string",
+                        "description": "User ids filter field. Example: '1' or '1,2,3'",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "Other criteria to filter answers separated by a comma. Syntax example \"(t.ref:like:'SO-%') and (t.date_creation:<:'20160101')\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "List Expense Reports 🔐",
+                "description": "Get a list of Expense Reports",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "createExpensereports",
+                "tags": [
+                    "expensereports"
+                ],
+                "parameters": [
+                    {
+                        "name": "createExpensereportsModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/createExpensereportsModel"
+                        }
+                    }
+                ],
+                "summary": "Create Expense Report object 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices/{id}": {
+            "get": {
+                "operationId": "retrieveInvoices",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of invoice",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Get properties of a invoice object 🔐",
+                "description": "Return an array with invoice informations",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "operationId": "updateInvoices",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of invoice to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "updateInvoicesModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/updateInvoicesModel"
+                        }
+                    }
+                ],
+                "summary": "Update invoice 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "removeInvoices",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Invoice ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Delete invoice 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices": {
+            "get": {
+                "operationId": "listInvoices",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "t.rowid",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Limit for list",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "thirdparty_ids",
+                        "type": "string",
+                        "description": "Thirdparty ids to filter orders of.",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "status",
+                        "type": "string",
+                        "description": "Filter by invoice status : draft | unpaid | paid | cancelled",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "Other criteria to filter answers separated by a comma. Syntax example \"(t.ref:like:'SO-%') and (t.date_creation:<:'20160101')\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "List invoices 🔐",
+                "description": "Get a list of invoices",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "createInvoices",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "createInvoicesModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/createInvoicesModel"
+                        }
+                    }
+                ],
+                "summary": "Create invoice object 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices/createfromorder/{orderid}": {
+            "post": {
+                "operationId": "invoicesCreateInvoiceFromOrder",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "orderid",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of the order",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Create an invoice using an existing order. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "405": {
+                        "description": "Method Not Allowed"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices/{id}/lines": {
+            "get": {
+                "operationId": "invoicesRetrieveLines",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of invoice",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Get lines of an invoice 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "invoicesCreateLine",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of invoice",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "invoicesCreateLineModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/invoicesCreateLineModel"
+                        }
+                    }
+                ],
+                "summary": "Add a line to a given invoice 🔐",
+                "description": "Exemple of POST query : { \"desc\": \"Desc\", \"subprice\": \"1.00000000\", \"qty\": \"1\", \"tva_tx\": \"20.000\", \"localtax1_tx\": \"0.000\", \"localtax2_tx\": \"0.000\", \"fk_product\": \"1\", \"remise_percent\": \"0\", \"date_start\": \"\", \"date_end\": \"\", \"fk_code_ventilation\": 0, \"info_bits\": \"0\", \"fk_remise_except\": null, \"product_type\": \"1\", \"rang\": \"-1\", \"special_code\": \"0\", \"fk_parent_line\": null, \"fk_fournprice\": null, \"pa_ht\": \"0.00000000\", \"label\": \"\", \"array_options\": [], \"situation_percent\": \"100\", \"fk_prev_id\": null, \"fk_unit\": null }",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices/{id}/lines/{lineid}": {
+            "put": {
+                "operationId": "invoicesUpdateLine",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of invoice to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "lineid",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of line to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "invoicesUpdateLineModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/invoicesUpdateLineModel"
+                        }
+                    }
+                ],
+                "summary": "Update a line to a given invoice 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "304": {
+                        "description": "Not Modified"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "invoicesRemoveLine",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of invoice",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "lineid",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of the line to delete",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Deletes a line of a given invoice 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "405": {
+                        "description": "Method Not Allowed"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices/{id}/settodraft": {
+            "post": {
+                "operationId": "invoicesSettodraft",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Order ID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "invoicesSettodraftModel",
+                        "description": "idwarehouse  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/invoicesSettodraftModel"
+                        }
+                    }
+                ],
+                "summary": "Sets an invoice as draft 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "304": {
+                        "description": "Not Modified"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices/{id}/validate": {
+            "post": {
+                "operationId": "invoicesValidate",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Invoice ID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "invoicesValidateModel",
+                        "description": "idwarehouse  \nnotrigger  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/invoicesValidateModel"
+                        }
+                    }
+                ],
+                "summary": "Validate an invoice 🔐",
+                "description": "If you get a bad value for param notrigger check that ou provide this in body { \"idwarehouse\": 0, \"notrigger\": 0 }",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices/{id}/settopaid": {
+            "post": {
+                "operationId": "invoicesSettopaid",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Order ID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "invoicesSettopaidModel",
+                        "description": "close_code  \nclose_note  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/invoicesSettopaidModel"
+                        }
+                    }
+                ],
+                "summary": "Sets an invoice as paid 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "304": {
+                        "description": "Not Modified"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices/{id}/settounpaid": {
+            "post": {
+                "operationId": "invoicesSettounpaid",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Order ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Sets an invoice as unpaid 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "304": {
+                        "description": "Not Modified"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices/{id}/usediscount/{discountid}": {
+            "post": {
+                "operationId": "invoicesUseDiscount",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of invoice",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "discountid",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of discount",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Add a discount line into an invoice (as an invoice line) using an existing absolute discount 🔐",
+                "description": "Note that this consume the discount.",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "405": {
+                        "description": "Method Not Allowed"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices/{id}/usecreditnote/{discountid}": {
+            "post": {
+                "operationId": "invoicesUseCreditNote",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of invoice",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "discountid",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of a discount coming from a credit note",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Add an available credit note discount to payments of an existing invoice. 🔐",
+                "description": " Note that this consume the credit note.",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "405": {
+                        "description": "Method Not Allowed"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/invoices/{id}/payments": {
+            "get": {
+                "operationId": "invoicesRetrievePayments",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of invoice",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Get list of payments of a given invoice 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "405": {
+                        "description": "Method Not Allowed"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "invoicesAddPayment",
+                "tags": [
+                    "invoices"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of invoice",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "invoicesAddPaymentModel",
+                        "description": "**datepaye** (required)  \n**paiementid** (required)  \n**closepaidinvoices** (required)  \n**accountid** (required)  \nnum_paiement  \ncomment  \nchqemetteur  \nchqbank  \n",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/invoicesAddPaymentModel"
+                        }
+                    }
+                ],
+                "summary": "Add payment line to a specific invoice 🔐",
+                "description": "The model schema is defined by the PaymentData class.",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/login": {
+            "get": {
+                "operationId": "listLogin",
+                "tags": [
+                    "login"
+                ],
+                "parameters": [
+                    {
+                        "name": "login",
+                        "type": "string",
+                        "description": "User login",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "type": "string",
+                        "description": "User password",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "entity",
+                        "type": "string",
+                        "description": "Entity (when multicompany module is used). '' means 1=first company.",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "reset",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Reset token (0=get current token, 1=ask a new token and canceled old token. This means access using current existing API token of user will fails: new token will be required for new access)",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Login 🔓",
+                "description": "Request the API token for a couple username / password. Using method POST is recommanded for security reasons (method GET is often logged by default by web servers with parameters so with login and pass into server log file). Both methods are provided for developer conveniance. Best is to not use at all the login API method and enter directly the \"DOLAPIKEY\" into field at the top right of page. Note: The API key (DOLAPIKEY) can be found/set on the user page.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "post": {
+                "operationId": "listLogin",
+                "tags": [
+                    "login"
+                ],
+                "parameters": [
+                    {
+                        "name": "listLoginModel",
+                        "description": "**login** (required)  \n**password** (required)  \nentity  \nreset  \n",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/listLoginModel"
+                        }
+                    }
+                ],
+                "summary": "Login 🔓",
+                "description": "Request the API token for a couple username / password. Using method POST is recommanded for security reasons (method GET is often logged by default by web servers with parameters so with login and pass into server log file). Both methods are provided for developer conveniance. Best is to not use at all the login API method and enter directly the \"DOLAPIKEY\" into field at the top right of page. Note: The API key (DOLAPIKEY) can be found/set on the user page.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/proposals/{id}": {
+            "get": {
+                "operationId": "retrieveProposals",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of commercial proposal",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Get properties of a commercial proposal object 🔐",
+                "description": "Return an array with commercial proposal informations",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "operationId": "updateProposals",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of commercial proposal to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "updateProposalsModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/updateProposalsModel"
+                        }
+                    }
+                ],
+                "summary": "Update commercial proposal general fields (won't touch lines of commercial proposal) 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "removeProposals",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Commercial proposal ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Delete commercial proposal 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/proposals": {
+            "get": {
+                "operationId": "listProposals",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "t.rowid",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Limit for list",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "thirdparty_ids",
+                        "type": "string",
+                        "description": "Thirdparty ids to filter commercial proposals.",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "Other criteria to filter answers separated by a comma. Syntax example \"(t.ref:like:'SO-%') and (t.datec:<:'20160101')\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "List commercial proposals 🔐",
+                "description": "Get a list of commercial proposals",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "createProposals",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "createProposalsModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/createProposalsModel"
+                        }
+                    }
+                ],
+                "summary": "Create commercial proposal object 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/proposals/{id}/lines": {
+            "get": {
+                "operationId": "proposalsRetrieveLines",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of commercial proposal",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Get lines of a commercial proposal 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "proposalsCreateLine",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of commercial proposal to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "proposalsCreateLineModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/proposalsCreateLineModel"
+                        }
+                    }
+                ],
+                "summary": "Add a line to given commercial proposal 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/proposals/{id}/lines/{lineid}": {
+            "put": {
+                "operationId": "proposalsUpdateLine",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of commercial proposal to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "lineid",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of line to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "proposalsUpdateLineModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/proposalsUpdateLineModel"
+                        }
+                    }
+                ],
+                "summary": "Update a line of given commercial proposal 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "proposalsRemoveLine",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of commercial proposal to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "lineid",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of line to delete",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Delete a line of given commercial proposal 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/proposals/{id}/settodraft": {
+            "post": {
+                "operationId": "proposalsSettodraft",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Order ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Set a proposal to draft 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/proposals/{id}/validate": {
+            "post": {
+                "operationId": "proposalsValidate",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Commercial proposal ID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "proposalsValidateModel",
+                        "description": "notrigger  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/proposalsValidateModel"
+                        }
+                    }
+                ],
+                "summary": "Validate a commercial proposal 🔐",
+                "description": "If you get a bad value for param notrigger check that ou provide this in body { \"notrigger\": 0 }",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "304": {
+                        "description": "Not Modified"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/proposals/{id}/close": {
+            "post": {
+                "operationId": "proposalsClose",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Commercial proposal ID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "proposalsCloseModel",
+                        "description": "**status** (required)  \nnote_private  \nnotrigger  \n",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/proposalsCloseModel"
+                        }
+                    }
+                ],
+                "summary": "Close (Accept or refuse) a quote / commercial proposal 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/proposals/{id}/setinvoiced": {
+            "post": {
+                "operationId": "proposalsSetinvoiced",
+                "tags": [
+                    "proposals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Commercial proposal ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Set a commercial proposal billed. Could be also called setbilled 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/setup/dictionary/payment_types": {
+            "get": {
+                "operationId": "setupRetrievePaymentTypes",
+                "tags": [
+                    "setup"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "code",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Number of items per page",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "active",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 1,
+                        "maximum": 1,
+                        "description": "Payment type is active or not",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "SQL criteria to filter with. Syntax example \"(t.code:=:'CHQ')\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get the list of payments types. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/setup/dictionary/countries": {
+            "get": {
+                "operationId": "setupRetrieveListOfCountries",
+                "tags": [
+                    "setup"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "code",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Number of items per page",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number (starting from zero)",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "filter",
+                        "type": "string",
+                        "description": "To filter the countries by name",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "lang",
+                        "type": "string",
+                        "description": "Code of the language the label of the countries must be translated to",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "Other criteria to filter answers separated by a comma. Syntax example \"(t.code:like:'A%') and (t.active:>=:0)\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get the list of countries. 🔐",
+                "description": " The names of the countries will be translated to the given language if the $lang parameter is provided. The value of $lang must be a language code supported by Dolibarr, for example 'en_US' or 'fr_FR'. The returned list is sorted by country ID.",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/setup/dictionary/countries/{id}": {
+            "get": {
+                "operationId": "setupRetrieveCountryByID",
+                "tags": [
+                    "setup"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of country",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "lang",
+                        "type": "string",
+                        "description": "Code of the language the name of the country must be translated to",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get country by ID. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/setup/dictionary/availability": {
+            "get": {
+                "operationId": "setupRetrieveAvailability",
+                "tags": [
+                    "setup"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "code",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Number of items per page",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "active",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 1,
+                        "maximum": 1,
+                        "description": "Delivery times is active or not",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "SQL criteria to filter with.",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get the list of delivery times. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/setup/dictionary/event_types": {
+            "get": {
+                "operationId": "setupRetrieveListOfEventTypes",
+                "tags": [
+                    "setup"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "code",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Number of items per page",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number (starting from zero)",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "type",
+                        "type": "string",
+                        "description": "To filter on type of event",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "module",
+                        "type": "string",
+                        "description": "To filter on module events",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "Other criteria to filter answers separated by a comma. Syntax example \"(t.code:like:'A%') and (t.active:>=:0)\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get the list of events types. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/setup/extrafields": {
+            "get": {
+                "operationId": "setupRetrieveListOfExtrafields",
+                "tags": [
+                    "setup"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "t.pos",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "type",
+                        "type": "string",
+                        "description": "Type of element ('adherent', 'commande', 'thirdparty', 'facture', 'propal', 'product', ...)",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "Other criteria to filter answers separated by a comma. Syntax example \"(t.label:like:'SO-%')\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get the list of extra fields. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/setup/dictionary/towns": {
+            "get": {
+                "operationId": "setupRetrieveListOfTowns",
+                "tags": [
+                    "setup"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "zip,town",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Number of items per page",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number (starting from zero)",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "zipcode",
+                        "type": "string",
+                        "description": "To filter on zipcode",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "town",
+                        "type": "string",
+                        "description": "To filter on city name",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "Other criteria to filter answers separated by a comma. Syntax example \"(t.code:like:'A%') and (t.active:>=:0)\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get the list of towns. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/setup/dictionary/payment_terms": {
+            "get": {
+                "operationId": "setupRetrievePaymentTerms",
+                "tags": [
+                    "setup"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "sortorder",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Number of items per page",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "active",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 1,
+                        "maximum": 1,
+                        "description": "Payment term is active or not",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "SQL criteria to filter. Syntax example \"(t.code:=:'CHQ')\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get the list of payments terms. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/setup/checkintegrity": {
+            "get": {
+                "operationId": "setupRetrieveCheckIntegrity",
+                "tags": [
+                    "setup"
+                ],
+                "parameters": [
+                    {
+                        "name": "target",
+                        "type": "string",
+                        "description": "Can be 'local' or 'default' or Url of the signatures file to use for the test. Must be reachable by the tested Dolibarr.",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "summary": "Do a test of integrity for files and setup. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/status": {
+            "get": {
+                "operationId": "listStatus",
+                "tags": [
+                    "status"
+                ],
+                "parameters": [],
+                "summary": "Get status (Dolibarr version) 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}": {
+            "get": {
+                "operationId": "retrieveThirdparties",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of thirdparty",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Get properties of a thirdparty object 🔐",
+                "description": "Return an array with thirdparty informations",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "operationId": "updateThirdparties",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of thirdparty to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "updateThirdpartiesModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/updateThirdpartiesModel"
+                        }
+                    }
+                ],
+                "summary": "Update thirdparty 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "removeThirdparties",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Thirparty ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Delete thirdparty 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties": {
+            "get": {
+                "operationId": "listThirdparties",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "t.rowid",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Limit for list",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "mode",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Set to 1 to show only customers Set to 2 to show only prospects Set to 3 to show only those are not customer neither prospect",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "Other criteria to filter answers separated by a comma. Syntax example \"(t.nom:like:'TheCompany%') and (t.date_creation:<:'20160101')\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "List thirdparties 🔐",
+                "description": "Get a list of thirdparties",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "createThirdparties",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "createThirdpartiesModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/createThirdpartiesModel"
+                        }
+                    }
+                ],
+                "summary": "Create thirdparty object 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}/merge/{idtodelete}": {
+            "put": {
+                "operationId": "thirdpartiesMerge",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of thirdparty to keep (the target thirdparty)",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "idtodelete",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of thirdparty to remove (the thirdparty to delete), once data has been merged into the target thirdparty.",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Merge a thirdparty into another one. 🔐",
+                "description": " Merge content (properties, notes) and objects (like invoices, events, orders, proposals, ...) of a thirdparty into a target thirdparty, then delete the merged thirdparty. If a property has a defined value both in thirdparty to delete and thirdparty to keep, the value into the thirdparty to delete will be ignored, the value of target thirdparty will remain, except for notes (content is concatenated).",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}/categories": {
+            "get": {
+                "operationId": "thirdpartiesRetrieveCategories",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of thirdparty",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "s.rowid",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Limit for list",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get customer categories for a thirdparty 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}/categories/{category_id}": {
+            "post": {
+                "operationId": "thirdpartiesAddCategory",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of thirdparty",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "category_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of category",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Add a customer category to a thirdparty 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "thirdpartiesRemoveCategory",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of thirdparty",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "category_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of category",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Remove the link between a customer category and the thirdparty 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}/supplier_categories": {
+            "get": {
+                "operationId": "thirdpartiesRetrieveSupplierCategories",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of thirdparty",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "s.rowid",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Limit for list",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get supplier categories for a thirdparty 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}/supplier_categories/{category_id}": {
+            "post": {
+                "operationId": "thirdpartiesAddSupplierCategory",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of thirdparty",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "category_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of category",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Add a supplier category to a thirdparty 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "thirdpartiesRemoveSupplierCategory",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of thirdparty",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "category_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of category",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Remove the link between a category and the thirdparty 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}/outstandingproposals": {
+            "get": {
+                "operationId": "thirdpartiesRetrieveOutStandingProposals",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of the thirdparty",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "mode",
+                        "type": "string",
+                        "defaultValue": "customer",
+                        "description": "'customer' or 'supplier'",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get outstanding proposals of thirdparty 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}/outstandingorders": {
+            "get": {
+                "operationId": "thirdpartiesRetrieveOutStandingOrder",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of the thirdparty",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "mode",
+                        "type": "string",
+                        "defaultValue": "customer",
+                        "description": "'customer' or 'supplier'",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get outstanding orders of thirdparty 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}/outstandinginvoices": {
+            "get": {
+                "operationId": "thirdpartiesRetrieveOutStandingInvoices",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of the thirdparty",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "mode",
+                        "type": "string",
+                        "defaultValue": "customer",
+                        "description": "'customer' or 'supplier'",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get outstanding invoices of thirdparty 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}/fixedamountdiscounts": {
+            "get": {
+                "operationId": "thirdpartiesRetrieveFixedAmountDiscounts",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of the thirdparty",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "filter",
+                        "type": "string",
+                        "defaultValue": "none",
+                        "enum": [
+                            "none",
+                            "available",
+                            "used"
+                        ],
+                        "description": "Filter exceptional discount. \"none\" will return every discount, \"available\" returns unapplied discounts, \"used\" returns applied discounts",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "f.type",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "Get fixed amount discount of a thirdparty (all sources: deposit, credit note, commercial offers...) 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "503": {
+                        "description": "Service Unavailable"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}/getinvoicesqualifiedforreplacement": {
+            "get": {
+                "operationId": "thirdpartiesRetrieveInvoicesQualifiedForReplacement",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of thirdparty",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Return list of invoices qualified to be replaced by another invoice. 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "405": {
+                        "description": "Method Not Allowed"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/thirdparties/{id}/getinvoicesqualifiedforcreditnote": {
+            "get": {
+                "operationId": "thirdpartiesRetrieveInvoicesQualifiedForCreditNote",
+                "tags": [
+                    "thirdparties"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of thirdparty",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Return list of invoices qualified to be corrected by a credit note. 🔐",
+                "description": "Invoices matching the following rules are returned (validated + payment on process) or classified (payed completely or payed partialy) + not already replaced + not already a credit note",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "405": {
+                        "description": "Method Not Allowed"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "operationId": "listUsers",
+                "tags": [
+                    "users"
+                ],
+                "parameters": [
+                    {
+                        "name": "sortfield",
+                        "type": "string",
+                        "defaultValue": "t.rowid",
+                        "description": "Sort field",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sortorder",
+                        "type": "string",
+                        "defaultValue": "ASC",
+                        "description": "Sort order",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int64",
+                        "defaultValue": 100,
+                        "description": "Limit for list",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Page number",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "user_ids",
+                        "type": "string",
+                        "description": "User ids filter field. Example: '1' or '1,2,3'",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "sqlfilters",
+                        "type": "string",
+                        "description": "Other criteria to filter answers separated by a comma. Syntax example \"(t.ref:like:'SO-%') and (t.date_creation:<:'20160101')\"",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "summary": "List Users 🔐",
+                "description": "Get a list of Users",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "createUsers",
+                "tags": [
+                    "users"
+                ],
+                "parameters": [
+                    {
+                        "name": "createUsersModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/createUsersModel"
+                        }
+                    }
+                ],
+                "summary": "Create user account 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "operationId": "retrieveUsers",
+                "tags": [
+                    "users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "ID of user",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Get properties of an user object 🔐",
+                "description": "Return an array with user informations",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "RestException"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "operationId": "updateUsers",
+                "tags": [
+                    "users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Id of account to update",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "updateUsersModel",
+                        "description": "request_data  \n",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/updateUsersModel"
+                        }
+                    }
+                ],
+                "summary": "Update account 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "removeUsers",
+                "tags": [
+                    "users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Account ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "Delete account 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/users/{id}/setGroup/{group}": {
+            "get": {
+                "operationId": "usersSetGroup",
+                "tags": [
+                    "users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "User ID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "group",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Group ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "summary": "add user to group 🔐",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "createBankaccountsModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Request data"
+                }
+            }
+        },
+        "updateBankaccountsModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "data"
+                }
+            }
+        },
+        "bankaccountsAddLineModel": {
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "description": "Payment date (timestamp)"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Payment mode (TYP,VIR,PRE,LIQ,VAD,CB,CHQ...)"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Label"
+                },
+                "amount": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Amount (may be 0)"
+                },
+                "category": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Category"
+                },
+                "cheque_number": {
+                    "type": "string",
+                    "description": "Cheque numberl"
+                },
+                "cheque_writer": {
+                    "type": "string",
+                    "description": "Name of cheque writer"
+                },
+                "cheque_bank": {
+                    "type": "string",
+                    "description": "Bank of cheque writer"
+                }
+            },
+            "required": [
+                "date",
+                "type",
+                "label",
+                "amount"
+            ]
+        },
+        "bankaccountsAddLinkModel": {
+            "properties": {
+                "url_id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "ID to set in the URL"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "URL of the link"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Label"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of link ('payment', 'company', 'member', ...)"
+                }
+            },
+            "required": [
+                "url_id",
+                "url",
+                "label",
+                "type"
+            ]
+        },
+        "updateContactsModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Datas"
+                }
+            }
+        },
+        "createContactsModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Request datas"
+                }
+            }
+        },
+        "contactsCreateUserModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Request datas"
+                }
+            }
+        },
+        "documentsBuilddocModel": {
+            "properties": {
+                "module_part": {
+                    "type": "string",
+                    "description": "Name of module or area concerned by file download ('invoice', 'order', ...)."
+                },
+                "original_file": {
+                    "type": "string",
+                    "description": "Relative path with filename, relative to modulepart (for example: IN201701-999/IN201701-999.pdf)."
+                },
+                "doctemplate": {
+                    "type": "string",
+                    "description": "Set here the doc template to use for document generation (If not set, use the default template)."
+                },
+                "langcode": {
+                    "type": "string",
+                    "description": "Language code like 'en_US', 'fr_FR', 'es_ES', ... (If not set, use the default language)."
+                }
+            },
+            "required": [
+                "module_part"
+            ]
+        },
+        "createDocumentsModel": {
+            "properties": {
+                "filename": {
+                    "type": "string",
+                    "description": "Name of file to create ('FA1705-0123.txt')"
+                },
+                "modulepart": {
+                    "type": "string",
+                    "description": "Name of module or area concerned by file upload ('facture', 'project', 'project_task', ...)"
+                },
+                "ref": {
+                    "type": "string",
+                    "description": "Reference of object (This will define subdir automatically and store submited file into it)"
+                },
+                "subdir": {
+                    "type": "string",
+                    "description": "Subdirectory (Only if ref not provided)"
+                },
+                "filecontent": {
+                    "type": "string",
+                    "description": "File content (string with file content. An empty file will be created if this parameter is not provided)"
+                },
+                "fileencoding": {
+                    "type": "string",
+                    "description": "File encoding (''=no encoding, 'base64'=Base 64)"
+                },
+                "overwriteifexists": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Overwrite file if exists (1 by default)"
+                }
+            },
+            "required": [
+                "filename",
+                "modulepart"
+            ]
+        },
+        "updateExpensereportsModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Datas"
+                }
+            }
+        },
+        "createExpensereportsModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Request data"
+                }
+            }
+        },
+        "updateInvoicesModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Datas"
+                }
+            }
+        },
+        "createInvoicesModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Request datas"
+                }
+            }
+        },
+        "invoicesCreateLineModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "InvoiceLine data"
+                }
+            }
+        },
+        "invoicesUpdateLineModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "InvoiceLine data"
+                }
+            }
+        },
+        "invoicesSettodraftModel": {
+            "properties": {
+                "idwarehouse": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Warehouse ID",
+                    "defaultValue": -1
+                }
+            }
+        },
+        "invoicesValidateModel": {
+            "properties": {
+                "idwarehouse": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Warehouse ID"
+                },
+                "notrigger": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "1=Does not execute triggers, 0= execute triggers"
+                }
+            }
+        },
+        "invoicesSettopaidModel": {
+            "properties": {
+                "close_code": {
+                    "type": "string",
+                    "description": "Code renseigne si on classe a payee completement alors que paiement incomplet (cas escompte par exemple)"
+                },
+                "close_note": {
+                    "type": "string",
+                    "description": "Commentaire renseigne si on classe a payee alors que paiement incomplet (cas escompte par exemple)"
+                }
+            }
+        },
+        "invoicesAddPaymentModel": {
+            "properties": {
+                "datepaye": {
+                    "type": "string",
+                    "description": "Payment date"
+                },
+                "paiementid": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Payment mode Id",
+                    "minimum": 1
+                },
+                "closepaidinvoices": {
+                    "type": "string",
+                    "description": "Close paid invoices",
+                    "enum": [
+                        "yes",
+                        "no"
+                    ]
+                },
+                "accountid": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Account Id",
+                    "minimum": 1
+                },
+                "num_paiement": {
+                    "type": "string",
+                    "description": "Payment number (optional)"
+                },
+                "comment": {
+                    "type": "string",
+                    "description": "Note (optional)"
+                },
+                "chqemetteur": {
+                    "type": "string",
+                    "description": "Payment issuer (mandatory if paiementcode = 'CHQ')"
+                },
+                "chqbank": {
+                    "type": "string",
+                    "description": "Issuer bank name (optional)"
+                }
+            },
+            "required": [
+                "datepaye",
+                "paiementid",
+                "closepaidinvoices",
+                "accountid"
+            ]
+        },
+        "listLoginModel": {
+            "properties": {
+                "login": {
+                    "type": "string",
+                    "description": "User login"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "User password"
+                },
+                "entity": {
+                    "type": "string",
+                    "description": "Entity (when multicompany module is used). '' means 1=first company."
+                },
+                "reset": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Reset token (0=get current token, 1=ask a new token and canceled old token. This means access using current existing API token of user will fails: new token will be required for new access)"
+                }
+            },
+            "required": [
+                "login",
+                "password"
+            ]
+        },
+        "updateProposalsModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Datas"
+                }
+            }
+        },
+        "createProposalsModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Request data"
+                }
+            }
+        },
+        "proposalsCreateLineModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Commercial proposal line data"
+                }
+            }
+        },
+        "proposalsUpdateLineModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Commercial proposal line data"
+                }
+            }
+        },
+        "proposalsValidateModel": {
+            "properties": {
+                "notrigger": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "1=Does not execute triggers, 0= execute triggers"
+                }
+            }
+        },
+        "proposalsCloseModel": {
+            "properties": {
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Must be 2 (accepted) or 3 (refused)",
+                    "minimum": 2,
+                    "maximum": 3
+                },
+                "note_private": {
+                    "type": "string",
+                    "description": "Add this mention at end of private note"
+                },
+                "notrigger": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Disabled triggers"
+                }
+            },
+            "required": [
+                "status"
+            ]
+        },
+        "updateThirdpartiesModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Datas"
+                }
+            }
+        },
+        "createThirdpartiesModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Request datas"
+                }
+            }
+        },
+        "createUsersModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "New user data"
+                }
+            }
+        },
+        "updateUsersModel": {
+            "properties": {
+                "request_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Datas"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "query"
+        }
+    },
+    "info": {
+        "version": "1",
+        "title": "Restler API Explorer",
+        "description": "Live API Documentation",
+        "contact": {
+            "name": "Restler Support",
+            "url": "luracast.com/products/restler",
+            "email": "arul@luracast.com"
+        },
+        "license": {
+            "name": "LGPL-2.1",
+            "url": "https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html"
+        }
+    }
+}
