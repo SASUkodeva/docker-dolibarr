@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+   mysql:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     ports:
+       - "3306:3306"
+     environment:
+       MYSQL_ROOT_PASSWORD: go4dbman
+       
+   dolibarr:
+     depends_on:
+       - mysql
+     links:
+        - mysql
+     build: ./dolibarr
+     ports:
+       - "80:80"
+     restart: always
+     volumes:
+       - conf:/var/www/html/conf
+       - documents:/var/www/html/documents
+     environment:
+      - VIRTUAL_HOST=dolibarr.local
+volumes:
+    db_data:
+    conf:
+    documents:
+
+    
